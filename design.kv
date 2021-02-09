@@ -1,0 +1,43 @@
+<MainScreen>:
+    GridLayout:
+        cols: 1
+        MDRectangleFlatButton:
+            text: "Manage exercises database"
+            size_hint_x: 0.5
+            pos_hint: {'center_x':0.1, 'center_y':0.2}
+            on_press: root.go_to_exercise_screen()
+        MDRectangleFlatButton:
+            text: "Start a session"
+            size_hint_x: None
+            width:800
+            pos_hint_y: 0.5
+            on_press: root.go_to_session_start_screen()
+
+<ExerciseScreen>:
+    GridLayout:
+        cols: 1
+        MDLabel:
+            text: "This is the screen where you can manage the exercise database"
+        MDIconButton:
+            icon: "home"
+            on_press: root.go_to_home_screen()
+
+<SessionStartScreen>:
+    GridLayout:
+        cols: 1
+        MDLabel:
+            text: "This is the screen where you set your settings to start a new session"
+        MDIconButton:
+            icon: "run"
+        MDIconButton:
+            icon: "home"
+            on_press: root.go_to_home_screen()
+
+
+<RootWidget>:
+    MainScreen:
+        name: "main_screen"
+    ExerciseScreen:
+        name: "exercise_screen"
+    SessionStartScreen:
+        name: "session_start_screen"
