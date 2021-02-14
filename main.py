@@ -1,29 +1,28 @@
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
-
-Builder.load_file('design.kv')
-
+from kivymd.uix.list import OneLineListItem
+from kivy.clock import Clock
 
 class HIITApp(MDApp):
     def build(self):
+        Builder.load_file('design.kv')
         return RootWidget()
 
 
 class MainScreen(Screen):
-    def go_to_exercise_screen(self):
-        self.manager.current = "exercise_screen"
-    def go_to_session_start_screen(self):
-        self.manager.current = "session_start_screen"
+    pass
 
 class ExerciseScreen(Screen):
-    def go_to_home_screen(self):
-        self.manager.current = "main_screen"
+    def on_pre_enter(self, *args):
+        self.ids.containerList.clear_widgets()
+        for i in range(5):
+            items = OneLineListItem(text='Item ' +str(i))
+            self.ids.containerList.add_widget(items)
 
 
 class SessionStartScreen(Screen):
-    def go_to_home_screen(self):
-        self.manager.current = "main_screen"
+    pass
 
 
 class RootWidget(ScreenManager):
