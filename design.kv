@@ -5,20 +5,35 @@
         name: "exercise_screen"
     SessionStartScreen:
         name: "session_start_screen"
+        id: screen_ss_ID
+    StartHIITScreen
+        name: "start_HIIT_screen"
 
 <MainScreen>:
     MDRectangleFlatButton:
         text: "Manage exercises database"
-        pos_hint: {'center_x':0.5, 'center_y':0.6}
+        pos_hint: {'center_x':0.5, 'center_y':0.9}
         on_press:
             root.manager.transition.direction = "right"
             root.manager.current = "exercise_screen"
     MDRectangleFlatButton:
-        text: "Start a session"
-        pos_hint: {'center_x':0.5, 'center_y':0.4}
+        text: "Create a planned session"
+        pos_hint: {'center_x':0.5, 'center_y':0.7}
+    MDRectangleFlatButton:
+        text: "Start a random session"
+        pos_hint: {'center_x':0.5, 'center_y':0.5}
         on_press:
             root.manager.transition.direction = "right"
             root.manager.current = "session_start_screen"
+    MDRectangleFlatButton:
+        text: "Start a planned session"
+        pos_hint: {'center_x':0.5, 'center_y':0.3}
+    MDRectangleFlatButton:
+        text: "HIIT Timer"
+        pos_hint: {'center_x':0.5, 'center_y':0.1}
+        on_press:
+            root.manager.transition.direction = "right"
+            root.manager.current = "start_HIIT_screen"
 
 <ExerciseScreen>:
     GridLayout:
@@ -33,18 +48,32 @@
                 id: containerList
 
 
-
-<SessionStartScreen>:
+<StartHIITScreen>:
     GridLayout:
         cols: 1
-        MDLabel:
-            text: "This is the screen where you set your settings to start a new session"
-        MDIconButton:
-            icon: "run"
         MDIconButton:
             icon: "home"
             on_press:
                 root.manager.transition.direction = "left"
                 root.manager.current = 'main_screen'
+        MDLabel:
+            text: "This is the screen where you set your settings to start a new HIIT timer"
+        MDIconButton:
+            icon: "run"
+
+
+<SessionStartScreen>:
+    GridLayout:
+        cols: 1
+        MDIconButton:
+            icon: "home"
+            on_press:
+                root.manager.transition.direction = "left"
+                root.manager.current = 'main_screen'
+        MDLabel:
+            text: "This is the screen where you set your settings to start a new session"
+        MDIconButton:
+            icon: "run"
+
 
 
