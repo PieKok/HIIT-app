@@ -36,26 +36,28 @@
             root.manager.current = "start_HIIT_screen"
 
 <ExerciseScreen>:
-    GridLayout:
-        cols: 1
-        MDIconButton:
-            icon: "home"
-            on_press:
-                root.manager.transition.direction = "left"
-                root.manager.current = "main_screen"
+    BoxLayout:
+        orientation: 'vertical'
+
+        Toolbar:
+            id: toolbar
+            title: 'Exercise database'
+            left_action_items: [["arrow-left", lambda x: app.change_screen('main_screen','left')]]
+
         ScrollView:
             MDList:
                 id: containerList
 
 
 <StartHIITScreen>:
-    GridLayout:
-        cols: 1
-        MDIconButton:
-            icon: "home"
-            on_press:
-                root.manager.transition.direction = "left"
-                root.manager.current = 'main_screen'
+    BoxLayout:
+        orientation: 'vertical'
+
+        Toolbar:
+            id: toolbar
+            title: 'HIIT timer settings'
+            left_action_items: [["arrow-left", lambda x: app.change_screen('main_screen','left')]]
+
         MDLabel:
             text: "This is the screen where you set your settings to start a new HIIT timer"
         MDIconButton:
@@ -63,13 +65,14 @@
 
 
 <SessionStartScreen>:
-    GridLayout:
-        cols: 1
-        MDIconButton:
-            icon: "home"
-            on_press:
-                root.manager.transition.direction = "left"
-                root.manager.current = 'main_screen'
+    BoxLayout:
+        orientation: 'vertical'
+
+        Toolbar:
+            id: toolbar
+            title: 'HIIT session settings'
+            left_action_items: [["arrow-left", lambda x: app.change_screen('main_screen','left')]]
+
         MDLabel:
             text: "This is the screen where you set your settings to start a new session"
         MDIconButton:
