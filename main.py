@@ -2,7 +2,7 @@ from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivymd.uix.toolbar import MDToolbar
-import exerciseScreen
+import exerciseScreen, hiitTimeScreen
 import sqlite3
 
 
@@ -19,7 +19,7 @@ class HIITApp(MDApp):
         Builder.load_file('design.kv')
         return RootWidget()
 
-    def change_screen(self,name_screen,direction):
+    def change_screen(self, name_screen, direction):
         self.root.transition.direction = direction
         self.root.current = name_screen
 

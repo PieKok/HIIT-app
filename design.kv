@@ -1,13 +1,19 @@
 <RootWidget>:
     MainScreen:
         name: "main_screen"
+        id: screen_ms_ID
     ExerciseScreen:
         name: "exercise_screen"
+        id: screen_es_ID
     SessionStartScreen:
         name: "session_start_screen"
         id: screen_ss_ID
     StartHIITScreen
         name: "start_HIIT_screen"
+        id: screen_sh_ID
+    HIIT_Timer_Screen:
+        name: "HIIT_timer_screen"
+        id: screen_ht_ID
 
 <MainScreen>:
     MDRectangleFlatButton:
@@ -50,18 +56,77 @@
 
 
 <StartHIITScreen>:
-    BoxLayout:
-        orientation: 'vertical'
+    GridLayout:
+        spacing: "10dp"
+        cols: 1
 
         Toolbar:
             id: toolbar
             title: 'HIIT timer settings'
             left_action_items: [["arrow-left", lambda x: app.change_screen('main_screen','left')]]
 
-        MDLabel:
-            text: "This is the screen where you set your settings to start a new HIIT timer"
+        GridLayout:
+            cols: 1
+            spacing: "10dp"
+            padding: "48dp"
+
+
+            MDTextField:
+                id: input_prep_time
+                input_filter: "int"
+                hint_text: "Preparation time [s]"
+
+            MDTextField:
+                id: input_work_time
+                input_filter: "int"
+                hint_text: "Work time [s]"
+
+            MDTextField:
+                id: input_rest_time
+                input_filter: "int"
+                hint_text: "Rest time [s]"
+
+            MDTextField:
+                id: input_number_round
+                input_filter: "int"
+                hint_text: "Number of round"
+
         MDIconButton:
             icon: "run"
+            on_press:
+                root.manager.transition.direction = "right"
+                root.manager.current = "HIIT_timer_screen"
+                app.root.ids.screen_ht_ID.start_timer(input_prep_time.text,input_work_time.text,input_rest_time.text,input_number_round.text)
+
+<HIIT_Timer_Screen>:
+    GridLayout:
+        spacing: "10dp"
+        cols: 1
+
+        Toolbar:
+            id: toolbar
+            title: 'HIIT timer'
+            left_action_items: [["arrow-left", lambda x: root.stop_timer() ]]
+
+        MDLabel:
+            id: label_title
+            font_style: "H2"
+            text: root.str_title
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: (255/255, 99/255, 71/255, 255/255)
+
+        MDLabel:
+            id: label_counter
+            font_style: "H1"
+            text: root.str_timer
+            halign: "center"
+
+        MDLabel:
+            id: label_round
+            font_style: "H4"
+            text: root.str_round
+            halign: "center"
 
 
 <SessionStartScreen>:
