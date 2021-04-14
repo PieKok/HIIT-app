@@ -23,7 +23,7 @@
             root.manager.transition.direction = "right"
             root.manager.current = "exercise_screen"
     MDRectangleFlatButton:
-        text: "Create a planned session"
+        text: "Manage planned sessions"
         pos_hint: {'center_x':0.5, 'center_y':0.7}
     MDRectangleFlatButton:
         text: "Start a random session"
@@ -91,12 +91,15 @@
                 input_filter: "int"
                 hint_text: "Number of round"
 
-        MDIconButton:
-            icon: "run"
-            on_press:
-                root.manager.transition.direction = "right"
-                root.manager.current = "HIIT_timer_screen"
-                app.root.ids.screen_ht_ID.start_timer(input_prep_time.text,input_work_time.text,input_rest_time.text,input_number_round.text)
+        RelativeLayout:
+            MDFloatingActionButton:
+                icon: "run"
+                md_bg_color: (106 / 255, 216 / 255, 139 / 255, 255 / 255)
+                pos_hint: {"right": 0.9, "top": 0.51}
+                on_press:
+                    root.manager.transition.direction = "right"
+                    root.manager.current = "HIIT_timer_screen"
+                    app.root.ids.screen_ht_ID.start_timer(input_prep_time.text,input_work_time.text,input_rest_time.text,input_number_round.text)
 
 <HIIT_Timer_Screen>:
     GridLayout:
@@ -106,7 +109,8 @@
         Toolbar:
             id: toolbar
             title: 'HIIT timer'
-            left_action_items: [["arrow-left", lambda x: root.stop_timer() ]]
+            left_action_items: [["arrow-left", lambda x: root.abort() ]]
+            right_action_items: [["play-pause", lambda x: root.toggle() ]]
 
         MDLabel:
             id: label_title
@@ -114,7 +118,7 @@
             text: root.str_title
             halign: "center"
             theme_text_color: "Custom"
-            text_color: (255/255, 99/255, 71/255, 255/255)
+            text_color: root.color_title
 
         MDLabel:
             id: label_counter
