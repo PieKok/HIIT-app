@@ -2,6 +2,7 @@ from kivy.uix.screenmanager import Screen
 from kivy.properties import StringProperty, ListProperty
 from kivy.clock import Clock
 from kivymd.app import MDApp
+from kivy.core.audio import SoundLoader
 
 
 class HIIT_Timer_Screen(Screen):
@@ -31,7 +32,6 @@ class HIIT_Timer_Screen(Screen):
         self.init_preparation()
 
         self.run_timer()
-        print(self.timer)
 
     def init_preparation(self):
         self.state_running = True
@@ -52,6 +52,7 @@ class HIIT_Timer_Screen(Screen):
     def update(self, *kwargs):
         if self.timer > 0:
             self.timer = self.timer - 1
+            self.play_sound()
             self.str_timer = str(self.timer)
         else:
             self.go_to_next_phase()
@@ -90,6 +91,23 @@ class HIIT_Timer_Screen(Screen):
                 self.str_timer = "Over!"
                 self.str_round = " "
                 Clock.unschedule(self.update)
+
+    def play_sound(self):
+        if self.timer == 4:
+            sound = SoundLoader.load('sounds/3.wav')
+            sound.volume = 1
+            sound.play()
+        elif self.timer == 3:
+            sound = SoundLoader.load('sounds/2.wav')
+            sound.play()
+        elif self.timer == 2:
+            sound = SoundLoader.load('sounds/1.wav')
+            sound.play()
+        elif self.timer == 1:
+            sound = SoundLoader.load('sounds/DingDing_3secs.wav')
+            sound.play()
+        else:
+            pass
 
     def toggle(self):
         if self.state_running:
