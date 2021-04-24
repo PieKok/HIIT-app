@@ -63,7 +63,6 @@ class WeakMethod:
 
 def fixBugs():
     import kivy.weakmethod as wm
-    print(' Fixing the bug? ')
     wm.WeakMethod.is_dead = WeakMethod.is_dead
     wm.WeakMethod.__init__ = WeakMethod.__init__
     wm.WeakMethod.__call__ = WeakMethod.__call__

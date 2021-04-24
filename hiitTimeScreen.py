@@ -95,12 +95,10 @@ class HIIT_Timer_Screen(Screen):
     def play_sound(self):
         if self.timer == 4:
             sound = SoundLoader.load('sounds/3.wav')
-            sound.volume = 1
             sound.play()
         elif self.timer == 3:
             sound = SoundLoader.load('sounds/2.wav')
             sound.play()
-            print('2')
         elif self.timer == 2:
             sound = SoundLoader.load('sounds/1.wav')
             sound.play()
