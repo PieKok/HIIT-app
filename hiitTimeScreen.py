@@ -100,6 +100,7 @@ class HIIT_Timer_Screen(Screen):
         elif self.timer == 3:
             sound = SoundLoader.load('sounds/2.wav')
             sound.play()
+            print('2')
         elif self.timer == 2:
             sound = SoundLoader.load('sounds/1.wav')
             sound.play()

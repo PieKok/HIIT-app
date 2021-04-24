@@ -47,6 +47,7 @@ class Toolbar(MDToolbar):
 
 
 if __name__ == '__main__':
-    print('Will it work like a PyCharm?')
-    HIITApp().run()
-    print('It worked like a PyCharm!')
+    theApp = HIITApp()
+    import bugs
+    bugs.fixBugs()
+    theApp.run()
