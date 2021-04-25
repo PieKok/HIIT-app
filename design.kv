@@ -130,6 +130,63 @@
         MDLabel:
             text: "Skipping rope"
 
+<ExerciseDialogContent>:
+    orientation: "vertical"
+    spacing: "10dp"
+    size_hint_y: None
+    height: "300dp"
+
+    MDLabel:
+        id: field_name
+        font_style: "H4"
+
+    MDLabel:
+        id: field_category
+
+    BoxLayout:
+        orientation: "horizontal"
+        spacing: "10dp"
+
+        MDCheckbox:
+            id: check_jumping
+            size_hint: (0.1, 1)
+            disabled: True
+        MDLabel:
+            text: "Jumping"
+
+    BoxLayout:
+        orientation: "horizontal"
+        spacing: "10dp"
+
+        MDCheckbox:
+            id: check_running
+            size_hint: (0.1, 1)
+            disabled: True
+        MDLabel:
+            text: "Running"
+
+    BoxLayout:
+        orientation: "horizontal"
+        spacing: "10dp"
+
+        MDCheckbox:
+            id: check_mattress
+            size_hint: (0.1, 1)
+            disabled: True
+        MDLabel:
+            text: "Mattress"
+
+    BoxLayout:
+        orientation: "horizontal"
+        spacing: "10dp"
+
+        MDCheckbox:
+            id: check_skip
+            size_hint: (0.1, 1)
+            disabled: True
+        MDLabel:
+            text: "Skipping rope"
+
 <StartHIITScreen>:
     GridLayout:
         spacing: "10dp"
