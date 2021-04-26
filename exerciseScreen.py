@@ -102,8 +102,6 @@ class ExerciseScreen(Screen):
         return not is_present
 
     def open_exercise(self, inst):
-        print(inst.text)
-
         app = MDApp.get_running_app()
         sql_statement = "SELECT * FROM exercises WHERE name='" + inst.text + "'"
         app.cursor.execute(sql_statement)

@@ -20,7 +20,7 @@
         text: "Manage exercises database"
         pos_hint: {'center_x':0.5, 'center_y':0.9}
         on_press:
-            root.manager.transition.direction = "right"
+            root.manager.transition.direction = "left"
             root.manager.current = "exercise_screen"
     MDRectangleFlatButton:
         text: "Manage planned sessions"
@@ -29,7 +29,7 @@
         text: "Start a random session"
         pos_hint: {'center_x':0.5, 'center_y':0.5}
         on_press:
-            root.manager.transition.direction = "right"
+            root.manager.transition.direction = "left"
             root.manager.current = "session_start_screen"
     MDRectangleFlatButton:
         text: "Start a planned session"
@@ -38,7 +38,7 @@
         text: "HIIT Timer"
         pos_hint: {'center_x':0.5, 'center_y':0.1}
         on_press:
-            root.manager.transition.direction = "right"
+            root.manager.transition.direction = "left"
             root.manager.current = "start_HIIT_screen"
 
 <ExerciseScreen>:
@@ -49,7 +49,7 @@
         Toolbar:
             id: toolbar
             title: 'Exercise database'
-            left_action_items: [["arrow-left", lambda x: app.change_screen('main_screen','left')]]
+            left_action_items: [["arrow-left", lambda x: app.change_screen('main_screen','right')]]
             right_action_items: [["plus", lambda x: root.button_add_exercise() ]]
 
         BoxLayout:
@@ -195,7 +195,7 @@
         Toolbar:
             id: toolbar
             title: 'HIIT timer settings'
-            left_action_items: [["arrow-left", lambda x: app.change_screen('main_screen','left')]]
+            left_action_items: [["arrow-left", lambda x: app.change_screen('main_screen','right')]]
 
         GridLayout:
             cols: 1
@@ -233,7 +233,7 @@
                 md_bg_color: (106 / 255, 216 / 255, 139 / 255, 255 / 255)
                 pos_hint: {"right": 0.9, "top": 0.51}
                 on_press:
-                    root.manager.transition.direction = "right"
+                    root.manager.transition.direction = "left"
                     root.manager.current = "HIIT_timer_screen"
                     app.root.ids.screen_ht_ID.start_timer(input_prep_time.text,input_work_time.text,input_rest_time.text,input_number_round.text)
 
@@ -276,7 +276,7 @@
         Toolbar:
             id: toolbar
             title: 'HIIT session settings'
-            left_action_items: [["arrow-left", lambda x: app.change_screen('main_screen','left')]]
+            left_action_items: [["arrow-left", lambda x: app.change_screen('main_screen','right')]]
 
         MDLabel:
             text: "This is the screen where you set your settings to start a new session"

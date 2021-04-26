@@ -120,4 +120,4 @@ class HIIT_Timer_Screen(Screen):
     def abort(self):
         Clock.unschedule(self.update)
         app = MDApp.get_running_app()
-        app.change_screen('start_HIIT_screen', 'left')
+        app.change_screen('start_HIIT_screen', 'right')
