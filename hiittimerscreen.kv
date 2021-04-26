@@ -1,0 +1,30 @@
+<HIIT_Timer_Screen>:
+    GridLayout:
+        spacing: "10dp"
+        cols: 1
+
+        Toolbar:
+            id: toolbar
+            title: 'HIIT timer'
+            left_action_items: [["arrow-left", lambda x: root.abort() ]]
+            right_action_items: [["play-pause", lambda x: root.toggle() ]]
+
+        MDLabel:
+            id: label_title
+            font_style: "H2"
+            text: root.str_title
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: root.color_title
+
+        MDLabel:
+            id: label_counter
+            font_style: "H1"
+            text: root.str_timer
+            halign: "center"
+
+        MDLabel:
+            id: label_round
+            font_style: "H4"
+            text: root.str_round
+            halign: "center"

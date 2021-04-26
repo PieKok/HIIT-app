@@ -1,0 +1,145 @@
+<ExerciseScreen>:
+    GridLayout:
+        spacing: "20dp"
+        cols: 1
+
+        Toolbar:
+            id: toolbar
+            title: 'Exercise database'
+            left_action_items: [["arrow-left", lambda x: app.change_screen('main_screen','right')]]
+            right_action_items: [["plus", lambda x: root.button_add_exercise() ]]
+
+        BoxLayout:
+            orientation: "vertical"
+            padding: "10dp"
+            size_hint: (1, 0.1)
+
+            MDBoxLayout:
+                adaptive_height: True
+
+                MDIconButton:
+                    icon: "magnify"
+
+                MDTextField:
+                    id: search_field
+                    hint_text: "Search exercise"
+                    on_text: root.display_searched_exercises(self.text)
+
+        ScrollView:
+            size_hint: (1, 0.9)
+            MDList:
+                id: containerList
+
+
+<AddExerciseDialogContent>:
+    orientation: "vertical"
+    spacing: "10dp"
+    size_hint_y: None
+    height: "300dp"
+
+    MDTextField:
+        id: field_name
+        hint_text: "Name"
+
+    MDDropDownItem:
+        id: dropdown_item
+        text: 'category'
+        pos_hint: {"center_x": .5}
+        on_release: root.menu.open()
+
+    BoxLayout:
+        orientation: "horizontal"
+        spacing: "10dp"
+
+        MDCheckbox:
+            id: check_jumping
+            size_hint: (0.1, 1)
+        MDLabel:
+            text: "Jumping"
+
+    BoxLayout:
+        orientation: "horizontal"
+        spacing: "10dp"
+
+        MDCheckbox:
+            id: check_running
+            size_hint: (0.1, 1)
+        MDLabel:
+            text: "Running"
+
+    BoxLayout:
+        orientation: "horizontal"
+        spacing: "10dp"
+
+        MDCheckbox:
+            id: check_mattress
+            size_hint: (0.1, 1)
+        MDLabel:
+            text: "Mattress"
+
+    BoxLayout:
+        orientation: "horizontal"
+        spacing: "10dp"
+
+        MDCheckbox:
+            id: check_skip
+            size_hint: (0.1, 1)
+        MDLabel:
+            text: "Skipping rope"
+
+<ExerciseDialogContent>:
+    orientation: "vertical"
+    spacing: "10dp"
+    size_hint_y: None
+    height: "300dp"
+
+    MDLabel:
+        id: field_name
+        font_style: "H4"
+
+    MDLabel:
+        id: field_category
+
+    BoxLayout:
+        orientation: "horizontal"
+        spacing: "10dp"
+
+        MDCheckbox:
+            id: check_jumping
+            size_hint: (0.1, 1)
+            disabled: True
+        MDLabel:
+            text: "Jumping"
+
+    BoxLayout:
+        orientation: "horizontal"
+        spacing: "10dp"
+
+        MDCheckbox:
+            id: check_running
+            size_hint: (0.1, 1)
+            disabled: True
+        MDLabel:
+            text: "Running"
+
+    BoxLayout:
+        orientation: "horizontal"
+        spacing: "10dp"
+
+        MDCheckbox:
+            id: check_mattress
+            size_hint: (0.1, 1)
+            disabled: True
+        MDLabel:
+            text: "Mattress"
+
+    BoxLayout:
+        orientation: "horizontal"
+        spacing: "10dp"
+
+        MDCheckbox:
+            id: check_skip
+            size_hint: (0.1, 1)
+            disabled: True
+        MDLabel:
+            text: "Skipping rope"

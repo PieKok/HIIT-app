@@ -1,0 +1,45 @@
+<RootWidget>:
+    MainScreen:
+        name: "main_screen"
+        id: screen_ms_ID
+    ExerciseScreen:
+        name: "exercise_screen"
+        id: screen_es_ID
+    SessionStartScreen:
+        name: "session_start_screen"
+        id: screen_ss_ID
+    StartHIITScreen
+        name: "start_HIIT_screen"
+        id: screen_sh_ID
+    HIIT_Timer_Screen:
+        name: "HIIT_timer_screen"
+        id: screen_ht_ID
+
+<MainScreen>:
+    MDRectangleFlatButton:
+        text: "Manage exercises database"
+        pos_hint: {'center_x':0.5, 'center_y':0.9}
+        on_press:
+            root.manager.transition.direction = "left"
+            root.manager.current = "exercise_screen"
+    MDRectangleFlatButton:
+        text: "Manage planned sessions"
+        pos_hint: {'center_x':0.5, 'center_y':0.7}
+    MDRectangleFlatButton:
+        text: "Start a random session"
+        pos_hint: {'center_x':0.5, 'center_y':0.5}
+        on_press:
+            root.manager.transition.direction = "left"
+            root.manager.current = "session_start_screen"
+    MDRectangleFlatButton:
+        text: "Start a planned session"
+        pos_hint: {'center_x':0.5, 'center_y':0.3}
+    MDRectangleFlatButton:
+        text: "HIIT Timer"
+        pos_hint: {'center_x':0.5, 'center_y':0.1}
+        on_press:
+            root.manager.transition.direction = "left"
+            root.manager.current = "start_HIIT_screen"
+
+
+

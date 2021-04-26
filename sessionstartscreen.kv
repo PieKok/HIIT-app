@@ -1,0 +1,13 @@
+<SessionStartScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+
+        Toolbar:
+            id: toolbar
+            title: 'HIIT session settings'
+            left_action_items: [["arrow-left", lambda x: app.change_screen('main_screen','right')]]
+
+        MDLabel:
+            text: "This is the screen where you set your settings to start a new session"
+        MDIconButton:
+            icon: "run"
