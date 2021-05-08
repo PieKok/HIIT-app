@@ -2,7 +2,7 @@ from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivymd.uix.toolbar import MDToolbar
-import exerciseScreen, hiitTimeScreen, sessionStartScreen, sessionScreen
+import exerciseScreen, hiitTimeScreen, sessionStartScreen, sessionScreen, sessionExerciseScreen
 import sqlite3
 from kivy.base import EventLoop
 
@@ -14,7 +14,8 @@ class HIITApp(MDApp):
                              "session_start_screen": "main_screen",
                              "start_HIIT_screen": "main_screen",
                              "HIIT_timer_screen": "start_HIIT_screen",
-                             "session_screen": "session_start_screen"
+                             "session_screen": "session_exercise_screen",
+                             "session_exercise_screen": "session_start_screen"
                              }
 
     def on_start(self):
@@ -30,6 +31,7 @@ class HIITApp(MDApp):
         Builder.load_file("starthiitscreen.kv")
         Builder.load_file("hiittimerscreen.kv")
         Builder.load_file("sessionscreen.kv")
+        Builder.load_file("sessionexercisescreen.kv")
         return RootWidget()
 
     def change_screen(self, name_screen, direction):
