@@ -1,0 +1,16 @@
+<Session_Exercise_Screen>:
+    GridLayout:
+        spacing: "20dp"
+        cols: 1
+
+        Toolbar:
+            id: toolbar
+            title: 'Session exercises'
+            left_action_items: [["arrow-left", lambda x: app.change_screen('session_start_screen','right')]]
+            right_action_items: [["run", lambda x: root.start_session()]]
+
+        ScrollView:
+            size_hint: (1, 0.9)
+            MDList:
+                id: exerciseList
+
