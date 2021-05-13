@@ -8,48 +8,125 @@
             title: 'Session settings'
             left_action_items: [["arrow-left", lambda x: app.change_screen('main_screen','right')]]
 
-        GridLayout:
-            cols: 1
-            spacing: "10dp"
-            padding: "48dp"
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
 
+            MDGridLayout:
+                adaptive_height: True
+                cols: 1
+                padding: "30dp"
+                spacing: "10dp"
 
-            MDTextField:
-                id: input_prep_time
-                input_filter: "int"
-                hint_text: "Preparation time [s]"
-                text: "5"
+                MDTextField:
+                    id: input_prep_time
+                    input_filter: "int"
+                    hint_text: "Preparation time [s]"
+                    text: "5"
+                    size_hint_y: None
 
-            MDTextField:
-                id: input_work_time
-                input_filter: "int"
-                hint_text: "Work time [s]"
-                text: "45"
+                MDTextField:
+                    id: input_work_time
+                    input_filter: "int"
+                    hint_text: "Work time [s]"
+                    text: "45"
+                    size_hint_y: None
 
-            MDTextField:
-                id: input_rest_time
-                input_filter: "int"
-                hint_text: "Rest time [s]"
-                text: "15"
+                MDTextField:
+                    id: input_rest_time
+                    input_filter: "int"
+                    hint_text: "Rest time [s]"
+                    text: "15"
+                    size_hint_y: None
 
-            MDTextField:
-                id: input_number_round
-                input_filter: "int"
-                hint_text: "Number of rounds"
-                text: "25"
+                MDTextField:
+                    id: input_number_round
+                    input_filter: "int"
+                    hint_text: "Number of rounds"
+                    text: "25"
+                    size_hint_y: None
 
-            MDTextField:
-                id: input_number_warmup_round
-                input_filter: "int"
-                hint_text: "Number of cardio warm-up rounds"
-                text: "5"
+                MDTextField:
+                    id: input_number_warmup_round
+                    input_filter: "int"
+                    hint_text: "Number of cardio warm-up rounds"
+                    text: "5"
+                    size_hint_y: None
 
-        RelativeLayout:
-            MDFloatingActionButton:
-                icon: "run"
-                md_bg_color: (106 / 255, 216 / 255, 139 / 255, 255 / 255)
-                pos_hint: {"right": 0.9, "top": 0.51}
-                on_press:
-                    root.manager.transition.direction = "left"
-                    root.manager.current = "session_exercise_screen"
-                    app.root.ids.screen_se_ID.create_a_session(input_prep_time.text,input_work_time.text,input_rest_time.text,input_number_round.text,input_number_warmup_round.text)
+                MDBoxLayout:
+                    adaptive_height: True
+                    size_hint_y: None
+
+                    MDCheckbox:
+                        id: check_jumping
+                        size_hint: None, None
+                        size: "48dp", "48dp"
+                        pos_hint: {"center_y": .5}
+                        active: True
+
+                    MDLabel:
+                        text: "Jumping"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint: {"center_y": .5}
+
+                MDBoxLayout:
+                    adaptive_height: True
+                    size_hint_y: None
+
+                    MDCheckbox:
+                        id: check_running
+                        size_hint: None, None
+                        size: "48dp", "48dp"
+                        pos_hint: {"center_y": .5}
+                        active: True
+
+                    MDLabel:
+                        text: "Running"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint: {"center_y": .5}
+
+                MDBoxLayout:
+                    adaptive_height: True
+                    size_hint_y: None
+
+                    MDCheckbox:
+                        id: check_mattress
+                        size_hint: None, None
+                        size: "48dp", "48dp"
+                        pos_hint: {"center_y": .5}
+                        active: True
+
+                    MDLabel:
+                        text: "Mattress"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint: {"center_y": .5}
+
+                MDBoxLayout:
+                    adaptive_height: True
+                    size_hint_y: None
+
+                    MDCheckbox:
+                        id: check_skipping
+                        size_hint: None, None
+                        size: "48dp", "48dp"
+                        pos_hint: {"center_y": .5}
+                        active: True
+
+                    MDLabel:
+                        text: "Skipping rope"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint: {"center_y": .5}
+
+                RelativeLayout:
+                    MDFloatingActionButton:
+                        icon: "run"
+                        md_bg_color: (106 / 255, 216 / 255, 139 / 255, 255 / 255)
+                        pos_hint: {"center_x": 0.9}
+                        on_press:
+                            root.manager.transition.direction = "left"
+                            root.manager.current = "session_exercise_screen"
+                            app.root.ids.screen_se_ID.create_a_session()

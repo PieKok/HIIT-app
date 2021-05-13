@@ -50,21 +50,21 @@ class ExerciseScreen(Screen):
         self.display_list_of_exercises(exercises)
 
     def button_add_exercise(self):
-        if not self.add_ex_dialog:
-            self.add_ex_dialog = MDDialog(
-                title="Add exercise",
-                type="custom",
-                content_cls=AddExerciseDialogContent(),
-                size_hint=(0.8, 0.8),
-                buttons=[
-                    MDFlatButton(
-                        text="Cancel", on_release=self.cancel_add
-                    ),
-                    MDFlatButton(
-                        text="OK", on_release=self.add_ex
-                    )
-                ]
-            )
+        #if not self.add_ex_dialog:
+        self.add_ex_dialog = MDDialog(
+            title="Add exercise",
+            type="custom",
+            content_cls=AddExerciseDialogContent(),
+            size_hint=(0.8, 0.8),
+            buttons=[
+                MDFlatButton(
+                    text="Cancel", on_release=self.cancel_add
+                ),
+                MDFlatButton(
+                    text="OK", on_release=self.add_ex
+                )
+            ]
+        )
         self.add_ex_dialog.open()
 
     def cancel_add(self, inst):
@@ -76,13 +76,13 @@ class ExerciseScreen(Screen):
         if my_category != '' and my_name != '' and self.check_name_ex(my_name):
             str_equipment = ""
             if self.add_ex_dialog.content_cls.ids.check_jumping.active:
-                str_equipment = str_equipment + "jumping / "
+                str_equipment = str_equipment + "jumping "
             if self.add_ex_dialog.content_cls.ids.check_running.active:
-                str_equipment = str_equipment + "running / "
+                str_equipment = str_equipment + "running "
             if self.add_ex_dialog.content_cls.ids.check_mattress.active:
-                str_equipment = str_equipment + "mattress / "
+                str_equipment = str_equipment + "mattress "
             if self.add_ex_dialog.content_cls.ids.check_skip.active:
-                str_equipment = str_equipment + "skipping rope"
+                str_equipment = str_equipment + "skipping "
 
             app = MDApp.get_running_app()
             app.cursor.execute("INSERT INTO exercises (name, category, equipment) VALUES (?, ?, ?);",
