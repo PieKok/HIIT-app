@@ -118,4 +118,4 @@ class Session_Exercise_Screen(Screen):
     def start_session(self):
         app = MDApp.get_running_app()
         app.change_screen('session_screen', 'left')
-        app.root.ids.screen_s_ID.start_timer(self.prep_time, self.work_time, self.rest_time, self.nb_round)
+        app.root.ids.screen_s_ID.start_timer(self.prep_time, self.work_time, self.rest_time, self.nb_round, self.session_exercises)

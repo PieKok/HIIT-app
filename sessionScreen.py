@@ -9,6 +9,7 @@ class Session_Screen(Screen):
     str_title = StringProperty()
     str_timer = StringProperty()
     str_round = StringProperty()
+    str_exo = StringProperty()
     color_title = ListProperty()
 
     def __init__(self, **kw):
@@ -22,12 +23,14 @@ class Session_Screen(Screen):
         self.nb_round = 999
         self.color_title = (255 / 255, 99 / 255, 71 / 255, 255 / 255)
         self.state_running = False
+        self.list_exos = None
 
-    def start_timer(self, prep_time=5, work_time=45, rest_time=15, nb_round=10):
+    def start_timer(self, prep_time=5, work_time=45, rest_time=15, nb_round=10,list_exos=None):
         self.prep_time = int(prep_time)
         self.work_time = int(work_time)
         self.rest_time = int(rest_time)
         self.nb_round = int(nb_round)
+        self.list_exos = list_exos
 
         self.init_preparation()
 
@@ -42,6 +45,7 @@ class Session_Screen(Screen):
         self.color_title = (50 / 255, 99 / 255, 220 / 255, 255 / 255)
         self.str_timer = str(self.timer)
         self.str_round = str(self.state_round) + "/" + str(self.nb_round)
+        self.str_exo = ""
 
     def run_timer(self):
         Clock.schedule_interval(self.update, 1)
@@ -67,6 +71,7 @@ class Session_Screen(Screen):
             self.str_title = "Work!"
             self.color_title = (255 / 255, 99 / 255, 71 / 255, 255 / 255)
             self.str_round = str(self.state_round) + "/" + str(self.nb_round)
+            self.str_exo = self.list_exos[self.state_round-1][0]
 
         elif self.state_phase == 'work':
             self.state_phase = 'rest'
@@ -75,6 +80,7 @@ class Session_Screen(Screen):
             self.str_timer = str(self.timer)
             self.str_title = "Rest"
             self.color_title = (106 / 255, 216 / 255, 139 / 255, 255 / 255)
+            self.str_exo = ""
 
         elif self.state_phase == 'rest':
             if self.state_round < self.nb_round:
@@ -86,10 +92,12 @@ class Session_Screen(Screen):
                 self.str_timer = str(self.timer)
                 self.str_title = "Work!"
                 self.str_round = str(self.state_round) + "/" + str(self.nb_round)
+                self.str_exo = self.list_exos[self.state_round - 1][0]
             else:
-                self.str_title = " "
+                self.str_title = ""
                 self.str_timer = "Over!"
-                self.str_round = " "
+                self.str_round = ""
+                self.str_exo = ""
                 Clock.unschedule(self.update)
 
     def play_sound(self):
