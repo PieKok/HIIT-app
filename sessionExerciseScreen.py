@@ -1,5 +1,5 @@
 from kivy.uix.screenmanager import Screen
-from kivymd.uix.list import OneLineAvatarListItem, ImageLeftWidget
+from kivymd.uix.list import OneLineAvatarIconListItem, ImageLeftWidget, IconRightWidget
 from kivymd.app import MDApp
 import random
 
@@ -22,6 +22,7 @@ class Session_Exercise_Screen(Screen):
     nb_warm = 0
     str_equipments = ""
     categories = []
+    filtered_exercises = None
     session_exercises = None
 
     def create_a_session(self):
@@ -34,8 +35,8 @@ class Session_Exercise_Screen(Screen):
         app.cursor.execute(sql_statement)
         all_exercises = app.cursor.fetchall()
 
-        filtered_exercises = self.filter_exercises(all_exercises)
-        self.session_exercises = self.pick_exercises(filtered_exercises)
+        self.filtered_exercises = self.filter_exercises(all_exercises)
+        self.session_exercises = self.pick_exercises(self.filtered_exercises)
 
         self.display_list_of_exercises(self.session_exercises)
 
@@ -109,11 +110,27 @@ class Session_Exercise_Screen(Screen):
         # Clear the list if it had been loaded in the past
         self.ids.exerciseList.clear_widgets()
         for ex in exercises:
-            items = OneLineAvatarListItem(text=ex[0])
+            items = OneLineAvatarIconListItem(text=ex[0])
             image_path = attribute_image_file(ex[1])
             image_widget = ImageLeftWidget(source=image_path)
             items.add_widget(image_widget)
+            icon_widget = IconRightWidget(icon="autorenew", on_press=self.change_exo)
+            items.add_widget(icon_widget)
             self.ids.exerciseList.add_widget(items)
+
+    def change_exo(self, inst):
+        my_index_old_exo = self.nb_round - 1 - inst.parent.parent.parent.children.index(inst.parent.parent)
+        my_old_exo = self.session_exercises[my_index_old_exo]
+        my_old_exo[3] = my_old_exo[3] -1
+
+        my_new_exo_name = my_old_exo[0]
+        while my_new_exo_name == my_old_exo[0]:
+            my_new_exo = random.choice(self.filtered_exercises[my_old_exo[1]])
+            my_new_exo_name = my_new_exo[0]
+        my_new_exo[3] = my_new_exo[3] + 1
+
+        self.session_exercises[my_index_old_exo] = my_new_exo
+        self.display_list_of_exercises(self.session_exercises)
 
     def start_session(self):
         app = MDApp.get_running_app()
