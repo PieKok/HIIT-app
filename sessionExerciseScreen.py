@@ -55,6 +55,10 @@ class Session_Exercise_Screen(Screen):
             self.str_equipments = self.str_equipments + "mattress "
         if app.root.ids.screen_ss_ID.ids.check_skipping.active:
             self.str_equipments = self.str_equipments + "skipping "
+        if app.root.ids.screen_ss_ID.ids.check_kettlebell.active:
+            self.str_equipments = self.str_equipments + "kettlebell "
+        if app.root.ids.screen_ss_ID.ids.check_skipping.active:
+            self.str_equipments = self.str_equipments + "pullbar "
 
     def filter_exercises(self, all_ex):
         available_equipments = self.str_equipments.split()

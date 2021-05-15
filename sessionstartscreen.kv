@@ -121,6 +121,40 @@
                         height: self.texture_size[1]
                         pos_hint: {"center_y": .5}
 
+                MDBoxLayout:
+                    adaptive_height: True
+                    size_hint_y: None
+
+                    MDCheckbox:
+                        id: check_kettlebell
+                        size_hint: None, None
+                        size: "48dp", "48dp"
+                        pos_hint: {"center_y": .5}
+                        active: True
+
+                    MDLabel:
+                        text: "Kettlebell"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint: {"center_y": .5}
+
+                MDBoxLayout:
+                    adaptive_height: True
+                    size_hint_y: None
+
+                    MDCheckbox:
+                        id: check_pullbar
+                        size_hint: None, None
+                        size: "48dp", "48dp"
+                        pos_hint: {"center_y": .5}
+                        active: True
+
+                    MDLabel:
+                        text: "Pull up bar"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint: {"center_y": .5}
+
                 RelativeLayout:
                     MDFloatingActionButton:
                         icon: "run"

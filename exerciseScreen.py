@@ -83,6 +83,10 @@ class ExerciseScreen(Screen):
                 str_equipment = str_equipment + "mattress "
             if self.add_ex_dialog.content_cls.ids.check_skip.active:
                 str_equipment = str_equipment + "skipping "
+            if self.add_ex_dialog.content_cls.ids.check_kettlebell.active:
+                str_equipment = str_equipment + "kettlebell "
+            if self.add_ex_dialog.content_cls.ids.check_pullbar.active:
+                str_equipment = str_equipment + "pullbar "
 
             app = MDApp.get_running_app()
             app.cursor.execute("INSERT INTO exercises (name, category, equipment) VALUES (?, ?, ?);",
@@ -148,8 +152,12 @@ class ExerciseDialogContent(BoxLayout):
             self.ids.check_running.active = True
         if "mattress" in ex[0][2]:
             self.ids.check_mattress.active = True
-        if "skipping rope" in ex[0][2]:
+        if "skipping" in ex[0][2]:
             self.ids.check_skip.active = True
+        if "kettlebell" in ex[0][2]:
+            self.ids.check_kettlebell.active = True
+        if "pullbar" in ex[0][2]:
+            self.ids.check_pullbar.active = True
 
 
 class AddExerciseDialogContent(BoxLayout):
