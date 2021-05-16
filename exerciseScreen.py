@@ -20,9 +20,24 @@ def attribute_image_file(category):
 class ExerciseScreen(Screen):
     add_ex_dialog = None
     ex_dialog = None
+    menu_category = None
+    searched_category = None
+    searched_text = None
 
     def on_pre_enter(self, *args):
-        self.display_all_exercises()
+        self.display_searched_exercises()
+        menu_items = [
+            {"text": "Cardio"},
+            {"text": "Legs"},
+            {"text": "Arms"},
+            {"text": "Core"},
+            {"text": "All"}]
+        self.menu_category = MDDropdownMenu(
+            caller=self.ids.dropdown_category,
+            items=menu_items,
+            position="bottom",
+            width_mult=3,
+            callback=self.filter_category)
 
     def display_all_exercises(self):
         # Connect to the database and load the exercises
@@ -42,15 +57,34 @@ class ExerciseScreen(Screen):
             items.add_widget(image_widget)
             self.ids.containerList.add_widget(items)
 
-    def display_searched_exercises(self, search_text):
+    def filter_category(self, instance_menu_item):
+        self.ids.dropdown_category.set_item(instance_menu_item.text)
+        self.searched_category = instance_menu_item.text
+        self.display_searched_exercises()
+        self.menu_category.dismiss()
+
+    def filter_text(self, search_text):
+        self.searched_text = search_text
+        self.display_searched_exercises()
+
+    def display_searched_exercises(self):
+        is_cat_searched = not ((not self.searched_category) or (self.searched_category == "All"))
+        is_text_searched = not ((not self.searched_text) or (self.searched_text == ""))
+        if not is_cat_searched and not is_text_searched:
+            sql_statement = "SELECT * FROM exercises"
+        elif not is_cat_searched and is_text_searched:
+            sql_statement = "SELECT * FROM exercises WHERE name LIKE '%" + self.searched_text + "%'"
+        elif is_cat_searched and not is_text_searched:
+            sql_statement = "SELECT * FROM exercises WHERE category = '" + self.searched_category + "'"
+        else:
+            sql_statement = "SELECT * FROM exercises WHERE name LIKE '%" + self.searched_text + "%' AND category = '" + self.searched_category + "'"
+
         app = MDApp.get_running_app()
-        sql_statement = "SELECT * FROM exercises WHERE name LIKE '%" + search_text + "%'"
         app.cursor.execute(sql_statement)
         exercises = app.cursor.fetchall()
         self.display_list_of_exercises(exercises)
 
     def button_add_exercise(self):
-        #if not self.add_ex_dialog:
         self.add_ex_dialog = MDDialog(
             title="Add exercise",
             type="custom",
@@ -93,8 +127,8 @@ class ExerciseScreen(Screen):
                                [my_name, my_category, str_equipment])
             app.connection.commit()
 
-            self.display_all_exercises()
             self.add_ex_dialog.dismiss()
+            self.display_searched_exercises()
         else:
             pass
 
@@ -135,8 +169,9 @@ class ExerciseScreen(Screen):
         app.cursor.execute("DELETE FROM exercises WHERE name='" + my_ex_name + "'")
         app.connection.commit()
 
-        self.display_all_exercises()
         self.ex_dialog.dismiss()
+        self.display_searched_exercises()
+
 
 
 class ExerciseDialogContent(BoxLayout):

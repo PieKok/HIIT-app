@@ -17,13 +17,19 @@
             MDBoxLayout:
                 adaptive_height: True
 
+                MDDropDownItem:
+                    id: dropdown_category
+                    text: 'category'
+                    pos_hint: {"center_y": .5}
+                    on_release: root.menu_category.open()
+
                 MDIconButton:
                     icon: "magnify"
 
                 MDTextField:
                     id: search_field
                     hint_text: "Search exercise"
-                    on_text: root.display_searched_exercises(self.text)
+                    on_text: root.filter_text(self.text)
 
         ScrollView:
             size_hint: (1, 0.9)
