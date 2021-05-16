@@ -80,7 +80,7 @@ class Session_Screen(Screen):
             self.str_timer = str(self.timer)
             self.str_title = "Rest"
             self.color_title = (106 / 255, 216 / 255, 139 / 255, 255 / 255)
-            self.str_exo = ""
+            self.str_exo = "Next: " + self.list_exos[self.state_round][0]
 
         elif self.state_phase == 'rest':
             if self.state_round < self.nb_round:
