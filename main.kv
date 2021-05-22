@@ -20,6 +20,9 @@
     Session_Screen:
         name: "session_screen"
         id: screen_s_ID
+    Session_Manager_Screen:
+        name:"session_manager_screen"
+        id: screen_sm_ID
 
 <MainScreen>:
     MDRectangleFlatButton:
@@ -33,6 +36,9 @@
         text: "Planned sessions"
         font_size: "25sp"
         pos_hint: {'center_x':0.5, 'center_y':0.6}
+        on_press:
+            root.manager.transition.direction = "left"
+            root.manager.current = "session_manager_screen"
     MDRectangleFlatButton:
         text: "Random session"
         font_size: "25sp"

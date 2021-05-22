@@ -1,0 +1,25 @@
+<Session_Manager_Screen>:
+    GridLayout:
+        spacing: "20dp"
+        cols: 1
+
+        Toolbar:
+            id: toolbar
+            title: 'Planned sessions'
+            left_action_items: [["arrow-left", lambda x: app.change_screen('main_screen','right')]]
+            right_action_items: [["plus", lambda x: root.create_session()]]
+
+        ScrollView:
+            size_hint: (1, 0.9)
+            MDList:
+                id: sessionList
+
+<SessionDialogContent>:
+    orientation: "vertical"
+    spacing: "10dp"
+    size_hint_y: None
+#    height: "100dp"
+
+    MDLabel:
+        id: session_name
+        font_style: "H6"
