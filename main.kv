@@ -23,26 +23,27 @@
 
 <MainScreen>:
     MDRectangleFlatButton:
-        text: "Manage exercises database"
-        pos_hint: {'center_x':0.5, 'center_y':0.9}
+        text: "Exercises"
+        font_size: "25sp"
+        pos_hint: {'center_x':0.5, 'center_y':0.8}
         on_press:
             root.manager.transition.direction = "left"
             root.manager.current = "exercise_screen"
     MDRectangleFlatButton:
-        text: "Manage planned sessions"
-        pos_hint: {'center_x':0.5, 'center_y':0.7}
+        text: "Planned sessions"
+        font_size: "25sp"
+        pos_hint: {'center_x':0.5, 'center_y':0.6}
     MDRectangleFlatButton:
-        text: "Start a random session"
-        pos_hint: {'center_x':0.5, 'center_y':0.5}
+        text: "Random session"
+        font_size: "25sp"
+        pos_hint: {'center_x':0.5, 'center_y':0.4}
         on_press:
             root.manager.transition.direction = "left"
             root.manager.current = "session_start_screen"
     MDRectangleFlatButton:
-        text: "Start a planned session"
-        pos_hint: {'center_x':0.5, 'center_y':0.3}
-    MDRectangleFlatButton:
         text: "HIIT Timer"
-        pos_hint: {'center_x':0.5, 'center_y':0.1}
+        font_size: "25sp"
+        pos_hint: {'center_x':0.5, 'center_y':0.2}
         on_press:
             root.manager.transition.direction = "left"
             root.manager.current = "start_HIIT_screen"
