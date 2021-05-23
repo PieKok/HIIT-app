@@ -37,9 +37,6 @@ class Session_Manager_Screen(Screen):
                     text="Cancel", on_release=self.cancel_session_dialog
                 ),
                 MDFlatButton(
-                    text="Delete", on_release=self.delete_session
-                ),
-                MDFlatButton(
                     text="Edit", on_release=self.edit_session
                 )
             ]
@@ -49,20 +46,16 @@ class Session_Manager_Screen(Screen):
     def cancel_session_dialog(self, inst):
         self.session_dialog.dismiss()
 
-    def delete_session(self, inst):
+    def edit_session(self, inst):
+        self.session_dialog.dismiss()
         my_session_name = self.session_dialog.content_cls.ids.session_name.text
         app = MDApp.get_running_app()
-        app.cursor.execute("DROP TABLE " + my_session_name)
-        app.connection.commit()
-
-        self.session_dialog.dismiss()
-        self.display_all_sessions()
-
-    def edit_session(self, inst):
-        pass
+        app.change_screen('session_editor_screen', 'left')
+        app.root.ids.screen_sed_ID.display_saved_session(my_session_name)
 
     def create_session(self):
-        pass
+        app = MDApp.get_running_app()
+        app.change_screen('session_editor_screen', 'left')
 
     def start_session(self, inst):
         pass
@@ -72,3 +65,11 @@ class SessionDialogContent(BoxLayout):
     def __init__(self, session_name, **kwargs):
         super().__init__(**kwargs)
         self.ids.session_name.text = session_name
+
+    def delete_session(self, session_name):
+        app = MDApp.get_running_app()
+        print("delete action")
+        app.cursor.execute("DROP TABLE " + session_name)
+        app.connection.commit()
+        app.root.ids.screen_sm_ID.session_dialog.dismiss()
+        app.root.ids.screen_sm_ID.display_all_sessions()

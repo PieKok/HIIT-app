@@ -15,11 +15,19 @@
                 id: sessionList
 
 <SessionDialogContent>:
-    orientation: "vertical"
+    orientation: "horizontal"
     spacing: "10dp"
     size_hint_y: None
-#    height: "100dp"
+
+    MDIconButton:
+        id: delete_session_button
+        icon: "delete"
+        pos_hint: {"center_y": .5}
+        on_release:
+            root.delete_session(session_name.text)
 
     MDLabel:
         id: session_name
         font_style: "H6"
+        pos_hint: {"center_y": .5}
+

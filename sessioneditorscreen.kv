@@ -1,0 +1,24 @@
+<Session_Editor_Screen>:
+    GridLayout:
+        spacing: "20dp"
+        cols: 1
+
+        Toolbar:
+            id: toolbar
+            title: 'Session edition'
+            left_action_items: [["arrow-left", lambda x: app.change_screen('session_manager_screen','right')]]
+            right_action_items: [["plus", lambda x: root.add_new_exo()]]
+
+        GridLayout:
+            spacing: "20dp"
+            padding: "10dp"
+            cols: 1
+
+            MDTextField:
+                id: session_name
+                hint_text: "Name of the session"
+
+            ScrollView:
+                size_hint: (1, 0.9)
+                MDList:
+                    id: exoList
