@@ -56,6 +56,8 @@ class Session_Manager_Screen(Screen):
     def create_session(self):
         app = MDApp.get_running_app()
         app.change_screen('session_editor_screen', 'left')
+        app.root.ids.screen_sed_ID.clean_screen()
+
 
     def start_session(self, inst):
         pass

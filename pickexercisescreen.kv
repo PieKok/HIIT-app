@@ -1,0 +1,75 @@
+<Pick_Exercise_Screen>:
+    GridLayout:
+        spacing: "20dp"
+        cols: 1
+
+        Toolbar:
+            id: toolbar
+            title: 'Add an exercise'
+            left_action_items: [["arrow-left", lambda x: app.change_screen('session_editor_screen','right')]]
+
+        GridLayout:
+            spacing: "10dp"
+            padding: "10dp"
+            cols: 1
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint: (1,0.1)
+                spacing: "40dp"
+
+                MDTextField:
+                    id: exo_name
+                    hint_text: "Exercise name"
+
+                MDFloatingActionButton:
+                    icon: "plus"
+                    md_bg_color: app.theme_cls.primary_color
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint: (1,0.1)
+                spacing: "40dp"
+
+                MDTextField:
+                    id: input_work
+                    input_filter: "int"
+                    hint_text: "Work time [s]"
+
+                MDTextField:
+                    id: input_rest
+                    input_filter: "int"
+                    hint_text: "Rest time [s]"
+
+            MDSeparator:
+                color: app.theme_cls.primary_color
+
+            MDLabel:
+                text: "Pick an exercise from the database:"
+                size_hint: (1, 0.05)
+
+
+            BoxLayout:
+                adaptive_height: True
+                size_hint: (1, 0.1)
+
+                MDDropDownItem:
+                    id: dropdown_category
+                    text: 'All1'
+                    pos_hint: {"center_y": .5}
+                    on_release: root.menu_category.open()
+
+                MDIconButton:
+                    icon: "magnify"
+                    pos_hint: {"center_y": .5}
+
+                MDTextField:
+                    id: search_field
+                    pos_hint: {"center_y": .5}
+                    hint_text: "Search exercise"
+                    on_text: root.filter_text(self.text)
+
+            ScrollView:
+                size_hint: (1, 0.8)
+                MDList:
+                    id: containerList

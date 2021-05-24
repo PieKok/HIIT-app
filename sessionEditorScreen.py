@@ -1,12 +1,12 @@
 from kivy.uix.screenmanager import Screen
 from kivymd.app import MDApp
-from kivymd.uix.dialog import MDDialog
-from kivymd.uix.list import TwoLineAvatarIconListItem, IconRightWidget
-from kivy.uix.boxlayout import BoxLayout
-from kivymd.uix.button import MDFlatButton
-
+from kivymd.uix.list import TwoLineIconListItem, IconLeftWidget
 
 class Session_Editor_Screen(Screen):
+    def clean_screen(self):
+        self.ids.session_name.text = ""
+        self.ids.exoList.clear_widgets()
+
     def display_saved_session(self, session_name):
         self.ids.session_name.text = session_name
 
@@ -23,13 +23,14 @@ class Session_Editor_Screen(Screen):
         for index, exo in enumerate(data_exos):
             main_text = str(index+1) + ". " + exo[0]
             sec_text = "Work: " + str(exo[1]) + "s / Rest: " + str(exo[2]) + "s"
-            items = TwoLineAvatarIconListItem(text=main_text, secondary_text = sec_text)
-            icon_widget = IconRightWidget(icon="delete", on_press=self.delete_exo)
+            items = TwoLineIconListItem(text=main_text, secondary_text = sec_text)
+            icon_widget = IconLeftWidget(icon="delete", on_press=self.delete_exo)
             items.add_widget(icon_widget)
             self.ids.exoList.add_widget(items)
 
-    def add_new_exo(self):
-        pass
+    def add_new_exo_button(self):
+        app = MDApp.get_running_app()
+        app.change_screen('pick_exercise_screen', 'left')
 
     def delete_exo(self, inst):
         pass
