@@ -14,18 +14,9 @@
             padding: "10dp"
             cols: 1
 
-            BoxLayout:
-                orientation: "horizontal"
-                size_hint: (1,0.1)
-                spacing: "40dp"
-
-                MDTextField:
-                    id: session_name
-                    hint_text: "Name of the session"
-
-                MDFloatingActionButton:
-                    icon: "content-save"
-                    md_bg_color: app.theme_cls.primary_color
+            MDTextField:
+                id: session_name
+                hint_text: "Name of the session"
 
             ScrollView:
                 size_hint: (1, 0.9)

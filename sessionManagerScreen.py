@@ -55,9 +55,13 @@ class Session_Manager_Screen(Screen):
 
     def create_session(self):
         app = MDApp.get_running_app()
+
+        #TODO: Ask for the name of the session in a dialog box
+        #TODO: Create the table in the SQL db
+        #TODO: Change the display of the session name into a label
+
         app.change_screen('session_editor_screen', 'left')
         app.root.ids.screen_sed_ID.clean_screen()
-
 
     def start_session(self, inst):
         pass

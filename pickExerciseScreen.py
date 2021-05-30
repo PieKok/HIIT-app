@@ -84,3 +84,11 @@ class Pick_Exercise_Screen(Screen):
 
     def select_exo(self, inst):
         self.ids.exo_name.text = inst.text
+
+    def add_exercise_button(self):
+        my_exo_name = self.ids.exo_name.text
+        my_work_time = self.ids.input_work.text
+        my_rest_time = self.ids.input_rest.text
+        app = MDApp.get_running_app()
+        app.root.ids.screen_sed_ID.add_exo_to_session(my_exo_name, my_work_time, my_rest_time)
+        app.change_screen('session_editor_screen', 'right')

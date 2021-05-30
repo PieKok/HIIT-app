@@ -25,6 +25,7 @@
                 MDFloatingActionButton:
                     icon: "plus"
                     md_bg_color: app.theme_cls.primary_color
+                    on_release: root.add_exercise_button()
 
             BoxLayout:
                 orientation: "horizontal"
@@ -45,7 +46,7 @@
                 color: app.theme_cls.primary_color
 
             MDLabel:
-                text: "Pick an exercise from the database:"
+                text: "You can pick an exercise from the database:"
                 size_hint: (1, 0.05)
 
 
