@@ -31,3 +31,23 @@
         font_style: "H6"
         pos_hint: {"center_y": .5}
 
+<RenameDialogContent>:
+    orientation: "vertical"
+    spacing: "10dp"
+    size_hint_y: None
+
+    MDLabel:
+        id: old_session_name
+
+    MDTextField:
+        id: new_session_name
+        hint_text: "New name"
+
+<NewDialogContent>:
+    orientation: "vertical"
+    spacing: "10dp"
+    size_hint_y: None
+
+    MDTextField:
+        id: new_session_name
+        hint_text: "Session name"

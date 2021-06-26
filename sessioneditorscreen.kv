@@ -1,6 +1,6 @@
 <Session_Editor_Screen>:
     GridLayout:
-        spacing: "20dp"
+        spacing: "10dp"
         cols: 1
 
         Toolbar:
@@ -10,13 +10,16 @@
             right_action_items: [["plus", lambda x: root.add_new_exo_button()]]
 
         GridLayout:
-            spacing: "20dp"
+            spacing: "5dp"
             padding: "10dp"
             cols: 1
 
-            MDTextField:
+            MDLabel:
                 id: session_name
+                size_hint: (1, 0.05)
                 hint_text: "Name of the session"
+
+            MDSeparator:
 
             ScrollView:
                 size_hint: (1, 0.9)
