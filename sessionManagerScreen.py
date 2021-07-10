@@ -138,7 +138,14 @@ class Session_Manager_Screen(Screen):
         app.root.ids.screen_sed_ID.display_saved_session(my_session_name)
 
     def start_session(self, inst):
-        pass
+        app = MDApp.get_running_app()
+        my_session_name = inst.parent.parent.children[2].children[2].text
+
+        sql_statement = "SELECT * FROM " + my_session_name
+        app.cursor.execute(sql_statement)
+        session_exos = app.cursor.fetchall()
+        app.change_screen('planned_session_screen', 'left')
+        app.root.ids.screen_pss_ID.start_timer(session_exos)
 
 
 class SessionDialogContent(BoxLayout):

@@ -1,0 +1,43 @@
+<Planned_Session_Screen>:
+    GridLayout:
+        spacing: "10dp"
+        cols: 1
+
+        Toolbar:
+            id: toolbar
+            title: 'Session ongoing'
+            left_action_items: [["arrow-left", lambda x: root.abort() ]]
+            right_action_items: [["play-pause", lambda x: root.toggle() ]]
+
+        BoxLayout:
+            orientation: "horizontal"
+
+            MDLabel:
+                id: label_title
+                font_style: "H2"
+                text: root.str_title
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: root.color_title
+
+            MDLabel:
+                id: label_round
+                font_style: "H5"
+                text: root.str_round
+                halign: "center"
+                size_hint: (0.3,1)
+
+        MDLabel:
+            id: label_counter
+            font_style: "H1"
+            text: root.str_timer
+            halign: "center"
+
+        MDLabel:
+            id: label_exercise
+            font_style: "H3"
+            text: root.str_exo
+            halign: "center"
+
+
+

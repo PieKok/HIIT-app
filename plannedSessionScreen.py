@@ -5,32 +5,27 @@ from kivymd.app import MDApp
 from kivy.core.audio import SoundLoader
 
 
-class Session_Screen(Screen):
+class Planned_Session_Screen(Screen):
     str_title = StringProperty()
     str_timer = StringProperty()
     str_round = StringProperty()
     str_exo = StringProperty()
     color_title = ListProperty()
+    prep_time = 5
 
     def __init__(self, **kw):
         super().__init__(**kw)
         self.state_round = 0
         self.timer = 999
         self.state_phase = 'prep'
-        self.prep_time = 999
-        self.work_time = 999
-        self.rest_time = 999
         self.nb_round = 999
         self.color_title = (255 / 255, 99 / 255, 71 / 255, 255 / 255)
         self.state_running = False
         self.list_exos = None
 
-    def start_timer(self, prep_time=5, work_time=45, rest_time=15, nb_round=10,list_exos=None):
-        self.prep_time = int(prep_time)
-        self.work_time = int(work_time)
-        self.rest_time = int(rest_time)
-        self.nb_round = int(nb_round)
-        self.list_exos = list_exos
+    def start_timer(self, input_exos):
+        self.list_exos = input_exos
+        self.nb_round = len(self.list_exos)
 
         self.init_preparation()
 
@@ -65,23 +60,23 @@ class Session_Screen(Screen):
         if self.state_phase == 'prep':
             self.state_round = self.state_round + 1
             self.state_phase = 'work'
-            self.timer = self.work_time
+            self.timer = self.list_exos[self.state_round-1][2]
 
             self.str_timer = str(self.timer)
             self.str_title = "Work!"
             self.color_title = (255 / 255, 99 / 255, 71 / 255, 255 / 255)
             self.str_round = str(self.state_round) + "/" + str(self.nb_round)
-            self.str_exo = self.list_exos[self.state_round-1][0]
+            self.str_exo = self.list_exos[self.state_round-1][1]
 
         elif self.state_phase == 'work':
             self.state_phase = 'rest'
-            self.timer = self.rest_time
+            self.timer = self.list_exos[self.state_round-1][3]
 
             self.str_timer = str(self.timer)
             self.str_title = "Rest"
             self.color_title = (106 / 255, 216 / 255, 139 / 255, 255 / 255)
             if self.state_round < self.nb_round:
-                self.str_exo = "Next: " + self.list_exos[self.state_round][0]
+                self.str_exo = "Next: " + self.list_exos[self.state_round][1]
             else:
                 self.str_exo = ""
 
@@ -90,12 +85,12 @@ class Session_Screen(Screen):
                 self.state_round = self.state_round + 1
                 self.state_phase = 'work'
                 self.color_title = (255 / 255, 99 / 255, 71 / 255, 255 / 255)
-                self.timer = self.work_time
+                self.timer = self.list_exos[self.state_round-1][2]
 
                 self.str_timer = str(self.timer)
                 self.str_title = "Work!"
                 self.str_round = str(self.state_round) + "/" + str(self.nb_round)
-                self.str_exo = self.list_exos[self.state_round - 1][0]
+                self.str_exo = self.list_exos[self.state_round - 1][1]
             else:
                 self.str_title = ""
                 self.str_timer = "Over!"
@@ -131,4 +126,4 @@ class Session_Screen(Screen):
     def abort(self):
         Clock.unschedule(self.update)
         app = MDApp.get_running_app()
-        app.change_screen('session_exercise_screen', 'right')
+        app.change_screen('session_manager_screen', 'right')
