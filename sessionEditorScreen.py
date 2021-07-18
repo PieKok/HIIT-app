@@ -12,7 +12,7 @@ class Session_Editor_Screen(Screen):
         self.ids.session_name.text = session_name
 
         app = MDApp.get_running_app()
-        sql_statement = "SELECT * FROM " + session_name
+        sql_statement = "SELECT * FROM '" + session_name + "'"
         app.cursor.execute(sql_statement)
         session_exos = app.cursor.fetchall()
 
@@ -38,13 +38,13 @@ class Session_Editor_Screen(Screen):
         session_str = self.ids.session_name.text
 
         # Count how many exos are already in the session
-        sql_statement1 = "SELECT COUNT(*) FROM " + session_str
+        sql_statement1 = "SELECT COUNT(*) FROM '" + session_str + "'"
         app.cursor.execute(sql_statement1)
         my_old_nb_exos = app.cursor.fetchall()
 
         # Add the new exo
         my_id = my_old_nb_exos[0][0]+1
-        sql_statement2 = "INSERT INTO " + session_str + " VALUES (" + str(my_id) + ",'" + exo_name + "'," + exo_time + "," + rest_time + ");"
+        sql_statement2 = "INSERT INTO '" + session_str + "' VALUES (" + str(my_id) + ",'" + exo_name + "'," + exo_time + "," + rest_time + ");"
         app.cursor.execute(sql_statement2)
         app.connection.commit()
 
@@ -58,12 +58,12 @@ class Session_Editor_Screen(Screen):
 
         # Delete the item
         app = MDApp.get_running_app()
-        sql_statement1 = "DELETE FROM " + session_str + " WHERE id=" + my_exo_index + ";"
+        sql_statement1 = "DELETE FROM '" + session_str + "' WHERE id=" + my_exo_index + ";"
         app.cursor.execute(sql_statement1)
         app.connection.commit()
 
         # Refresh the id of the exos after the one just deleted
-        sql_statement2 = "UPDATE " + session_str + " SET id = id - 1 WHERE id > " + my_exo_index + ";"
+        sql_statement2 = "UPDATE '" + session_str + "' SET id = id - 1 WHERE id > " + my_exo_index + ";"
         app.cursor.execute(sql_statement2)
         app.connection.commit()
 

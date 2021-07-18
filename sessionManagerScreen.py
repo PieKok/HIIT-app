@@ -88,7 +88,7 @@ class Session_Manager_Screen(Screen):
             self.new_name_dialog.dismiss()
 
             app = MDApp.get_running_app()
-            sql_statement = "ALTER TABLE " + old_name + " RENAME TO " + new_name
+            sql_statement = "ALTER TABLE '" + old_name + "' RENAME TO '" + new_name + "'"
             app.cursor.execute(sql_statement)
             app.connection.commit()
 
@@ -127,21 +127,25 @@ class Session_Manager_Screen(Screen):
 
     def do_create_session(self, inst):
         my_session_name = self.new_session_dialog.content_cls.ids.new_session_name.text
-        self.new_session_dialog.dismiss()
 
-        app = MDApp.get_running_app()
-        sql_statement = "CREATE TABLE " + my_session_name + " (id smallint, exo text, work smallint, rest smallint);"
-        app.cursor.execute(sql_statement)
-        app.connection.commit()
+        if my_session_name != "" and self.check_name_session(my_session_name):
+            self.new_session_dialog.dismiss()
 
-        app.change_screen('session_editor_screen', 'left')
-        app.root.ids.screen_sed_ID.display_saved_session(my_session_name)
+            app = MDApp.get_running_app()
+            sql_statement = "CREATE TABLE '" + my_session_name + "' (id smallint, exo text, work smallint, rest smallint);"
+            app.cursor.execute(sql_statement)
+            app.connection.commit()
+
+            app.change_screen('session_editor_screen', 'left')
+            app.root.ids.screen_sed_ID.display_saved_session(my_session_name)
+        else:
+            pass
 
     def start_session(self, inst):
         app = MDApp.get_running_app()
         my_session_name = inst.parent.parent.children[2].children[2].text
 
-        sql_statement = "SELECT * FROM " + my_session_name
+        sql_statement = "SELECT * FROM '" + my_session_name + "'"
         app.cursor.execute(sql_statement)
         session_exos = app.cursor.fetchall()
         app.change_screen('planned_session_screen', 'left')
@@ -155,8 +159,7 @@ class SessionDialogContent(BoxLayout):
 
     def delete_session(self, session_name):
         app = MDApp.get_running_app()
-        print("delete action")
-        app.cursor.execute("DROP TABLE " + session_name)
+        app.cursor.execute("DROP TABLE '" + session_name +"'")
         app.connection.commit()
         app.root.ids.screen_sm_ID.session_dialog.dismiss()
         app.root.ids.screen_sm_ID.display_all_sessions()

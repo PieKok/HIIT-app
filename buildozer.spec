@@ -1,7 +1,7 @@
 [app]
 
 # (str) Title of your application
-title = HIIT app
+title = HIIT Timer
 
 # (str) Package name
 package.name = myHIITapp
@@ -46,7 +46,7 @@ requirements = python3,kivy,kivymd,sqlite3
 #presplash.filename = %(source.dir)s/data/presplash.png
 
 # (str) Icon of the application
-#icon.filename = %(source.dir)s/data/icon.png
+icon.filename = %(source.dir)s/images/HIIT_Timer_Icon.png
 
 # (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
 orientation = portrait
