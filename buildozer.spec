@@ -28,7 +28,7 @@ source.include_exts = py,png,jpg,kv,atlas,db,wav
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
-version = 0.1
+version = 0.2
 
 # (str) Application versioning (method 2)
 # version.regex = __version__ = ['"](.*)['"]
@@ -36,11 +36,11 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy,kivymd,sqlite3
+requirements = python3,kivy==2.0.0,kivymd==0.104.1,pygments==2.7.4,Pillow,sqlite3
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
-# requirements.source.kivy = ../../kivy
+# requirements.source.kivymd = ../../kivymd
 
 # (str) Presplash of the application
 #presplash.filename = %(source.dir)s/data/presplash.png
@@ -94,7 +94,7 @@ android.permissions = WAKE_LOCK
 #android.features = android.hardware.usb.host
 
 # (int) Target Android API, should be as high as possible.
-#android.api = 27
+android.api = 29
 
 # (int) Minimum API your APK will support.
 #android.minapi = 21
