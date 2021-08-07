@@ -34,28 +34,28 @@
         id: screen_pss_ID
 
 <MainScreen>:
-    MDRectangleFlatButton:
+    MDFillRoundFlatButton:
         text: "Exercises"
         font_size: 20
         pos_hint: {'center_x':0.5, 'center_y':0.8}
         on_press:
             root.manager.transition.direction = "left"
             root.manager.current = "exercise_screen"
-    MDRectangleFlatButton:
+    MDFillRoundFlatButton:
         text: "Planned sessions"
         font_size: 20
         pos_hint: {'center_x':0.5, 'center_y':0.6}
         on_press:
             root.manager.transition.direction = "left"
             root.manager.current = "session_manager_screen"
-    MDRectangleFlatButton:
+    MDFillRoundFlatButton:
         text: "Random session"
         font_size: 20
         pos_hint: {'center_x':0.5, 'center_y':0.4}
         on_press:
             root.manager.transition.direction = "left"
             root.manager.current = "session_start_screen"
-    MDRectangleFlatButton:
+    MDFillRoundFlatButton:
         text: "HIIT Timer"
         font_size: 20
         pos_hint: {'center_x':0.5, 'center_y':0.2}
