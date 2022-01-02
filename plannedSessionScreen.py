@@ -40,7 +40,7 @@ class Planned_Session_Screen(Screen):
         self.color_title = (50 / 255, 99 / 255, 220 / 255, 255 / 255)
         self.str_timer = str(self.timer)
         self.str_round = str(self.state_round) + "/" + str(self.nb_round)
-        self.str_exo = ""
+        self.str_exo = "Next: " + self.list_exos[self.state_round][1]
 
     def run_timer(self):
         Clock.schedule_interval(self.update, 1)
@@ -62,35 +62,52 @@ class Planned_Session_Screen(Screen):
             self.state_phase = 'work'
             self.timer = self.list_exos[self.state_round-1][2]
 
-            self.str_timer = str(self.timer)
-            self.str_title = "Work!"
             self.color_title = (255 / 255, 99 / 255, 71 / 255, 255 / 255)
+            self.str_title = "Work!"
             self.str_round = str(self.state_round) + "/" + str(self.nb_round)
-            self.str_exo = self.list_exos[self.state_round-1][1]
+            if self.timer == 0:  # Special case of exercise with no pre-determined duration
+                self.str_timer = self.list_exos[self.state_round-1][1]
+                self.ids.label_counter.font_style = "H4"
+                self.str_exo = 'Press play when done'
+                self.ids.label_exercise.font_style = "H6"
+                self.toggle()
+            else:
+                self.str_timer = str(self.timer)
+                self.str_exo = self.list_exos[self.state_round-1][1]
 
         elif self.state_phase == 'work':
             self.state_phase = 'rest'
             self.timer = self.list_exos[self.state_round-1][3]
 
             self.str_timer = str(self.timer)
+            self.ids.label_counter.font_style = "H1"
             self.str_title = "Rest"
             self.color_title = (106 / 255, 216 / 255, 139 / 255, 255 / 255)
             if self.state_round < self.nb_round:
                 self.str_exo = "Next: " + self.list_exos[self.state_round][1]
             else:
                 self.str_exo = ""
+            self.ids.label_exercise.font_style = "H3"
 
         elif self.state_phase == 'rest':
             if self.state_round < self.nb_round:
                 self.state_round = self.state_round + 1
                 self.state_phase = 'work'
-                self.color_title = (255 / 255, 99 / 255, 71 / 255, 255 / 255)
                 self.timer = self.list_exos[self.state_round-1][2]
 
-                self.str_timer = str(self.timer)
+                self.color_title = (255 / 255, 99 / 255, 71 / 255, 255 / 255)
                 self.str_title = "Work!"
                 self.str_round = str(self.state_round) + "/" + str(self.nb_round)
-                self.str_exo = self.list_exos[self.state_round - 1][1]
+                if self.timer == 0:  # Special case of exercise with no pre-determined duration
+                    self.str_timer = self.list_exos[self.state_round - 1][1]
+                    self.ids.label_counter.font_style = "H4"
+                    self.str_exo = 'Press play when done'
+                    self.ids.label_exercise.font_style = "H6"
+                    self.toggle()
+                else:
+                    self.str_timer = str(self.timer)
+                    self.str_exo = self.list_exos[self.state_round - 1][1]
+
             else:
                 self.str_title = ""
                 self.str_timer = "Over!"

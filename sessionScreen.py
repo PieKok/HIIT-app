@@ -45,7 +45,7 @@ class Session_Screen(Screen):
         self.color_title = (50 / 255, 99 / 255, 220 / 255, 255 / 255)
         self.str_timer = str(self.timer)
         self.str_round = str(self.state_round) + "/" + str(self.nb_round)
-        self.str_exo = ""
+        self.str_exo = "Next: " + self.list_exos[self.state_round][0]
 
     def run_timer(self):
         Clock.schedule_interval(self.update, 1)

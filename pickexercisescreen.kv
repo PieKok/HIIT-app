@@ -15,7 +15,7 @@
 
             BoxLayout:
                 orientation: "horizontal"
-                size_hint: (1,0.1)
+                size_hint: (1,0.15)
                 spacing: "40dp"
 
                 MDTextField:
@@ -42,8 +42,18 @@
                     input_filter: "int"
                     hint_text: "Rest time [s]"
 
+            MDLabel:
+                text: "If 0s work time, the user will have to press 'play' when done with the exercise"
+                size_hint: (1,0.05)
+
+            MDLabel:
+                size_hint: (1,0.01)
+
             MDSeparator:
                 color: app.theme_cls.primary_color
+
+            MDLabel:
+                size_hint: (1,0.01)
 
             MDLabel:
                 text: "You can pick an exercise from the database:"
