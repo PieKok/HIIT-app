@@ -25,3 +25,23 @@
                 size_hint: (1, 0.9)
                 MDList:
                     id: exoList
+
+<EditDialogContent>:
+    orientation: "vertical"
+    spacing: "10dp"
+    size_hint_y: None
+    height: "160dp"
+
+    MDTextField:
+        id: input_name
+        hint_text: "Exercise name"
+
+    MDTextField:
+        id: input_work
+        input_filter: "int"
+        hint_text: "Work time [s]"
+
+    MDTextField:
+        id: input_rest
+        input_filter: "int"
+        hint_text: "Rest time [s]"
