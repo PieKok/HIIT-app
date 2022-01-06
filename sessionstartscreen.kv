@@ -39,19 +39,64 @@
                     text: "15"
                     size_hint_y: None
 
-                MDTextField:
-                    id: input_number_round
-                    input_filter: "int"
-                    hint_text: "Number of rounds"
-                    text: "25"
-                    size_hint_y: None
+                MDSeparator:
+                    height: "3dp"
+
+                MDLabel:
+                    height: "1dp"
 
                 MDTextField:
                     id: input_number_warmup_round
                     input_filter: "int"
-                    hint_text: "Number of cardio warm-up rounds"
+                    hint_text: "Number of warm-up rounds"
                     text: "3"
                     size_hint_y: None
+                    on_text: root.update_round_count()
+
+                MDTextField:
+                    id: input_number_cardio_round
+                    input_filter: "int"
+                    hint_text: "Number of cardio rounds"
+                    text: "4"
+                    size_hint_y: None
+                    on_text: root.update_round_count()
+
+                MDTextField:
+                    id: input_number_core_round
+                    input_filter: "int"
+                    hint_text: "Number of core rounds"
+                    text: "6"
+                    size_hint_y: None
+                    on_text: root.update_round_count()
+
+                MDTextField:
+                    id: input_number_arms_round
+                    input_filter: "int"
+                    hint_text: "Number of arms rounds"
+                    text: "6"
+                    size_hint_y: None
+                    on_text: root.update_round_count()
+
+                MDTextField:
+                    id: input_number_leg_round
+                    input_filter: "int"
+                    hint_text: "Number of leg rounds"
+                    text: "6"
+                    size_hint_y: None
+                    on_text: root.update_round_count()
+
+                MDLabel:
+                    id: text_nb_round
+                    text: "Total: 25 rounds"
+
+                MDLabel:
+                    height: "1dp"
+
+                MDSeparator:
+                    height: "3dp"
+
+                MDLabel:
+                    height: "1dp"
 
                 MDBoxLayout:
                     adaptive_height: True

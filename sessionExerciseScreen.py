@@ -18,8 +18,12 @@ class Session_Exercise_Screen(Screen):
     prep_time = 0
     work_time = 0
     rest_time = 0
-    nb_round = 0
     nb_warm = 0
+    nb_cardio = 0
+    nb_core = 0
+    nb_arms = 0
+    nb_legs = 0
+    nb_rounds = 0
     str_equipments = ""
     categories = []
     filtered_exercises = None
@@ -45,8 +49,13 @@ class Session_Exercise_Screen(Screen):
         self.prep_time = int(app.root.ids.screen_ss_ID.ids.input_prep_time.text)
         self.work_time = int(app.root.ids.screen_ss_ID.ids.input_work_time.text)
         self.rest_time = int(app.root.ids.screen_ss_ID.ids.input_rest_time.text)
-        self.nb_round = int(app.root.ids.screen_ss_ID.ids.input_number_round.text)
         self.nb_warm = int(app.root.ids.screen_ss_ID.ids.input_number_warmup_round.text)
+        self.nb_cardio = int(app.root.ids.screen_ss_ID.ids.input_number_cardio_round.text)
+        self.nb_core = int(app.root.ids.screen_ss_ID.ids.input_number_core_round.text)
+        self.nb_arms = int(app.root.ids.screen_ss_ID.ids.input_number_arms_round.text)
+        self.nb_legs = int(app.root.ids.screen_ss_ID.ids.input_number_leg_round.text)
+        self.nb_rounds = self.nb_warm + self.nb_cardio + self.nb_core + self.nb_arms + self.nb_legs
+
         if app.root.ids.screen_ss_ID.ids.check_jumping.active:
             self.str_equipments = self.str_equipments + "jumping "
         if app.root.ids.screen_ss_ID.ids.check_running.active:
@@ -92,21 +101,35 @@ class Session_Exercise_Screen(Screen):
 
     def pick_exercises(self, dic_exo):
         picked_exos = list()
-        next_category = {"Cardio": "Core", "Core": "Legs", "Legs": "Arms", "Arms": "Cardio"}
+        my_cats = ['Cardio', 'Core', 'Legs', 'Arms']
+        my_counts = [self.nb_cardio,self.nb_core,self.nb_arms,self.nb_legs]
+        my_cat_counter = 0
 
-        my_cat = "Cardio"
-        for i_round in range(1, self.nb_round + 1):
-            if i_round > self.nb_warm: # Warm-up is only Cardio exercises
-                my_cat = next_category[my_cat]
+        for i_round in range(1, self.nb_rounds + 1):
+            if i_round <= self.nb_warm: # Warm-up is only Cardio exercises
+                my_cat_counter = 0
+            else:  # Go to next category of exercise
+                my_cat_counter = my_cat_counter + 1
+                if my_cat_counter == 4:
+                    my_cat_counter = 0
+                # if all exercises of this category are already programmed, go to next cat
+                while my_counts[my_cat_counter] == 0:
+                    my_cat_counter = my_cat_counter + 1
+                    if my_cat_counter == 4:
+                        my_cat_counter = 0
 
+            my_cat = my_cats[my_cat_counter]
             my_exo_list = dic_exo[my_cat]
-            while not my_exo_list: # In case one category has no exercise
-                my_cat = next_category[my_cat]
-                my_exo_list = dic_exo[my_cat]
+
+            if not my_exo_list: # In case one category has no exercise
+                my_exo_list = [['No exo found', '', '', 0]] # dummy exo
+
             min_used = min([exo[3] for exo in my_exo_list])  # Use all exercices before reusing a same exercise
             my_selected_exo = random.choice([exo for exo in my_exo_list if exo[3] == min_used])
             picked_exos.append(my_selected_exo)
             my_selected_exo[3] = my_selected_exo[3] + 1
+            if i_round > self.nb_warm:
+                my_counts[my_cat_counter] = my_counts[my_cat_counter] - 1
 
         return picked_exos
 
@@ -123,7 +146,7 @@ class Session_Exercise_Screen(Screen):
             self.ids.exerciseList.add_widget(items)
 
     def change_exo(self, inst):
-        my_index_old_exo = self.nb_round - 1 - inst.parent.parent.parent.children.index(inst.parent.parent)
+        my_index_old_exo = self.nb_rounds - 1 - inst.parent.parent.parent.children.index(inst.parent.parent)
         my_old_exo = self.session_exercises[my_index_old_exo]
         my_old_exo[3] = my_old_exo[3] -1
 
@@ -139,4 +162,4 @@ class Session_Exercise_Screen(Screen):
     def start_session(self):
         app = MDApp.get_running_app()
         app.change_screen('session_screen', 'left')
-        app.root.ids.screen_s_ID.start_timer(self.prep_time, self.work_time, self.rest_time, self.nb_round, self.session_exercises)
+        app.root.ids.screen_s_ID.start_timer(self.prep_time, self.work_time, self.rest_time, self.nb_rounds, self.session_exercises)
