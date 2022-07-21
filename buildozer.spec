@@ -28,7 +28,7 @@ source.include_exts = py,png,jpg,kv,atlas,db,wav
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
-version = 0.2
+version = 0.4
 
 # (str) Application versioning (method 2)
 # version.regex = __version__ = ['"](.*)['"]
@@ -94,7 +94,7 @@ android.permissions = WAKE_LOCK
 #android.features = android.hardware.usb.host
 
 # (int) Target Android API, should be as high as possible.
-android.api = 29
+android.api = 30
 
 # (int) Minimum API your APK will support.
 #android.minapi = 21
