@@ -21,8 +21,8 @@ class Pick_Exercise_Screen(Screen):
 
     def on_pre_enter(self, *args):
         self.ids.exo_name.text = ""
-        self.ids.input_work.text = "45"
-        self.ids.input_rest.text = "15"
+        #self.ids.input_work.text = "45"
+        #self.ids.input_rest.text = "15"
         self.ids.dropdown_category.text = "All"
         self.ids.dropdown_category.current_item = "All"
         self.ids.dropdown_category.ids.label_item.text = "All"
